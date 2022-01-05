@@ -1,5 +1,11 @@
 import LogoSrc from '../../assets/img/karasuno-removebg-preview.png';
 import styled from 'styled-components';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link,
+} from "react-router-dom";
 
 const Nav = styled.section`
   background-color: rgb(199, 92, 20);
@@ -14,6 +20,18 @@ const Nav = styled.section`
    position:relative
   }
 
+`;
+
+const HeaderCopy = styled.h1`
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 600;
+    color: white;
+    margin-left: 12px;
+    display:none;
+    @media(min-width: 768px) {
+        display:block;
+       }
 `;
 
 const NavItemContainer = styled.div`
@@ -43,7 +61,10 @@ function Header() {
     return (
         <Nav>
             <NavItemContainer>
-                <HeaderImage />
+                <Link to='/'>
+                    <HeaderImage />
+                </Link>
+                <HeaderCopy>Coach Ukai's Training Grounds</HeaderCopy>
             </NavItemContainer>
         </Nav>
     );
