@@ -4,10 +4,11 @@ import {
     Routes,
     Route,
     Link,
-  } from "react-router-dom";
+} from "react-router-dom";
 import LogoSrc from '../assets/img/karasuno-removebg-preview.png';
 import styled from 'styled-components';
 import VolleyballCourtTool from '../components/Home/VolleyballCourtTool';
+import PlayerListing from '../components/Home/PlayerListing';
 
 const HomePageSection = styled.section`
     max-width:1000px;
@@ -20,14 +21,40 @@ const HomePageSection = styled.section`
 
 
 function Home(props) {
-  // Declare a new state variable, which we'll call "count"
-  const [count, setCount] = useState(0);
+    // Declare a new state variable, which we'll call "count"
+    const [players, setPlayers] = useState([
+        {
+            id: '1',
+            first_name: 'Hinata',
+            last_name: 'Shoyo',
+            number: '10',
+            height: '164.2',
+            age: '16',
+        },
+        {
+            id: '2',
+            first_name: 'Kageyama',
+            last_name: 'Tobio',
+            number: '9',
+            height: '181.9',
+            age: '16',
+        },
+        {
+            id: '3',
+            first_name: 'Sawamura',
+            last_name: 'Daichi',
+            number: '1',
+            height: '176.7',
+            age: '18',
+        },
+    ]);
 
-  return (
-    <HomePageSection>
-       <VolleyballCourtTool />
-    </HomePageSection>
-  );
+    return (
+        <HomePageSection>
+            <VolleyballCourtTool />
+            <PlayerListing players={players}/>
+        </HomePageSection>
+    );
 }
 
 export default Home
