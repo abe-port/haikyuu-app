@@ -8,9 +8,9 @@ function PlayerListing(props) {
         <div>
             Players ({props.players.length}):
             <div>
-            {props.players.map((player, index) => (
-        <li key={index}> {player.first_name} {player.last_name}</li>
-      ))}
+                {props.players.map((player, index) => (
+                    <li key={index}> {player.first_name} {player.last_name}</li>
+                ))}
             </div>
         </div>
     );
