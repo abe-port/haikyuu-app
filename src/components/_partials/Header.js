@@ -16,6 +16,7 @@ const Nav = styled.section`
   bottom:0;
   left:0;
   height:60px;
+  z-index: 999;
   @media(min-width: 768px) {
    position:relative
   }

@@ -9,6 +9,7 @@ import {
 import Home from './pages/Home';
 import './App.css';
 import Header from './components/_partials/Header';
+import PlayerDetail from './pages/PlayerDetail';
 
 const Page = styled.section`
   min-height:100vh;
@@ -26,6 +27,7 @@ function App() {
         <div>
           <Routes>
             <Route exact path="/" element={<Home />} />
+            <Route exact path="/players/:id" element={<PlayerDetail />} />
           </Routes>
         </div>
       </Page>
