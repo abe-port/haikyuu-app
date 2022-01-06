@@ -30,7 +30,7 @@ function Home(props) {
             number: '10',
             height: '164.2',
             age: '16',
-            
+            position:''
         },
         {
             id: 2,
@@ -51,6 +51,8 @@ function Home(props) {
             position:1
         },
     ]);
+
+    const activePlayer = players[0]
 
     return (
         <HomePageSection>

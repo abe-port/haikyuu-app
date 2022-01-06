@@ -16,6 +16,7 @@ margin-bottom: 0;
 const UnorderedList = styled.ul`
 list-style-type:none;
 padding-inline-start: 0px;
+margin-bottom:70px;
 `;
 
 const ListItem = styled.li`
@@ -70,10 +71,13 @@ cursor:pointer;
 
 function PlayerListing(props) {
 
+    const activePlayers = props.players.filter(player => player.position);
+    const benchedPlayers = props.players.filter(player => !player.position);
+
     return (
         <div>
             <PlayerListingHeader>
-                Players ({props.players.length}):
+                Active Players ({activePlayers.length}):
             </PlayerListingHeader>
             <UnorderedList>
                 <ListItem bolded>
@@ -81,7 +85,30 @@ function PlayerListing(props) {
                     <Number className="number">NUMBER</Number>
                     <Position className="position">POSITION NUMBER</Position>
                 </ListItem>
-                {props.players.map((player, index) => (
+                {activePlayers.map((player, index) => (
+                    <ListItem key={index}>
+                        <Name className="name">{player.first_name} {player.last_name}</Name>
+                        <Number className="number">{player.number}</Number>
+                        <Position className="position">{player.position}</Position>
+                        <Link to={`players/${player.id}`}>
+                            <EditIcon><span className="material-icons">
+                                edit
+                            </span>
+                            </EditIcon>
+                        </Link>
+                    </ListItem>
+                ))}
+            </UnorderedList>
+            <PlayerListingHeader>
+                Bench ({benchedPlayers.length}):
+            </PlayerListingHeader>
+            <UnorderedList>
+                <ListItem bolded>
+                    <Name className="name">NAME</Name>
+                    <Number className="number">NUMBER</Number>
+                    <Position className="position">POSITION NUMBER</Position>
+                </ListItem>
+                {benchedPlayers.map((player, index) => (
                     <ListItem key={index}>
                         <Name className="name">{player.first_name} {player.last_name}</Name>
                         <Number className="number">{player.number}</Number>
