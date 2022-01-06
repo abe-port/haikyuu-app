@@ -10,23 +10,26 @@ import Home from './pages/Home';
 import './App.css';
 import Header from './components/_partials/Header';
 
+const Page = styled.section`
+  min-height:100vh;
+  background: rgb(239, 239, 239);
+  
+`;
 
-const Button = styled.button`background: transparent;
-border-radius: 3px;
-border: 2px solid palevioletred;
-color: palevioletred;
-margin: 0 1em;
-padding: 0.25em 1em;`
+
 
 function App() {
   return (
     <Router>
-      <Header/>
-      <div>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-        </Routes>
-      </div>
+      <Page>
+        <Header />
+        <div>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+          </Routes>
+        </div>
+      </Page>
+
     </Router>
 
   );
