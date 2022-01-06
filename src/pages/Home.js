@@ -30,7 +30,7 @@ function Home(props) {
             number: '10',
             height: '164.2',
             age: '16',
-            position:''
+            hasPosition:false
         },
         {
             id: 2,
@@ -39,7 +39,7 @@ function Home(props) {
             number: '9',
             height: '181.9',
             age: '16',
-            position:null
+            hasPosition:false
         },
         {
             id: 3,
@@ -48,15 +48,15 @@ function Home(props) {
             number: '1',
             height: '176.7',
             age: '18',
-            position:1
+            hasPosition:true
         },
     ]);
 
-    const activePlayer = players[0]
+    const activePlayers = players.filter(player => player.hasPosition);
 
     return (
         <HomePageSection>
-            <VolleyballCourtTool />
+            <VolleyballCourtTool players={activePlayers}/>
             <PlayerListing players={players}/>
         </HomePageSection>
     );

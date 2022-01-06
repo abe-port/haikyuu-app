@@ -71,8 +71,8 @@ cursor:pointer;
 
 function PlayerListing(props) {
 
-    const activePlayers = props.players.filter(player => player.position);
-    const benchedPlayers = props.players.filter(player => !player.position);
+    const activePlayers = props.players.filter(player => player.hasPosition);
+    const benchedPlayers = props.players.filter(player => !player.hasPosition);
 
     return (
         <div>
@@ -89,13 +89,13 @@ function PlayerListing(props) {
                     <ListItem key={index}>
                         <Name className="name">{player.first_name} {player.last_name}</Name>
                         <Number className="number">{player.number}</Number>
-                        <Position className="position">{player.position}</Position>
-                        <Link to={`players/${player.id}`}>
+                        <Position className="position">{index+1}</Position>
+                        {/* <Link to={`players/${player.id}`}>
                             <EditIcon><span className="material-icons">
                                 edit
                             </span>
                             </EditIcon>
-                        </Link>
+                        </Link> */}
                     </ListItem>
                 ))}
             </UnorderedList>
@@ -113,12 +113,12 @@ function PlayerListing(props) {
                         <Name className="name">{player.first_name} {player.last_name}</Name>
                         <Number className="number">{player.number}</Number>
                         <Position className="position">{player.position}</Position>
-                        <Link to={`players/${player.id}`}>
+                        {/* <Link to={`players/${player.id}`}>
                             <EditIcon><span className="material-icons">
                                 edit
                             </span>
                             </EditIcon>
-                        </Link>
+                        </Link> */}
                     </ListItem>
                 ))}
             </UnorderedList>

@@ -16,7 +16,7 @@ const CourtImage = styled.div`
 const Player = styled.div.attrs(props => ({
     type: 'text',
     className: props.player,
-  }))`
+}))`
     position:absolute;
     left: 0;
     top: 0;
@@ -65,38 +65,19 @@ const Player = styled.div.attrs(props => ({
 `;
 
 
-
 function VolleyballCourtTool(props) {
 
     return (
         <CourtContainer>
             <CourtImage>
-                <img src='/court.png' alt='Volleyball Court' style={{visibility: "hidden", height: '100%', width: '100%'}}/>
+                <img src='/court.png' alt='Volleyball Court' style={{ visibility: "hidden", height: '100%', width: '100%' }} />
 
-                <Player player='player1'>
-                    <img src={ProfilePic} alt="Logo" />
-                    <div className="name">test name</div>
-                </Player>
-                <Player player='player2'>
-                    <img src={ProfilePic} alt="Logo" />
-                    <div className="name">test name 2</div>
-                </Player>
-                <Player player='player3'>
-                    <img src={ProfilePic} alt="Logo" />
-                    <div className="name">test name 3</div>
-                </Player>
-                <Player player='player4'>
-                    <img src={ProfilePic} alt="Logo" />
-                    <div className="name">test name 4</div>
-                </Player>
-                <Player player='player5'>
-                    <img src={ProfilePic} alt="Logo" />
-                    <div className="name">test name 5</div>
-                </Player>
-                <Player player='player6'>
-                    <img src={ProfilePic} alt="Logo" />
-                    <div className="name">test name 6</div>
-                </Player>
+                {props.players.map((player, index) => (
+                    <Player player={`player${index+1}`} key={index}>
+                        <img src={ProfilePic} alt="Logo" />
+                        <div className="name"><span style={{fontWeight:'bold'}}>{player.number}</span> {player.first_name} {player.last_name} </div>
+                    </Player>
+                ))}
 
             </CourtImage>
         </CourtContainer>
