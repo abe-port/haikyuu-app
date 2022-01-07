@@ -82,10 +82,10 @@ const reorder = (list, startIndex, endIndex) => {
 
 function PlayerListing(props) {
 
-    const [state, setState] = useState({ 
-        activePlayers: props.players.filter(player => player.hasPosition),
-        benchedPlayers: props.players.filter(player => !player.hasPosition),
-    });
+    // const [state, setState] = useState({ 
+    //     activePlayers: props.players.filter(player => player.hasPosition),
+    //     benchedPlayers: props.players.filter(player => !player.hasPosition),
+    // });
 
     const onDragEnd = result => {
 
@@ -101,12 +101,13 @@ function PlayerListing(props) {
           }
       
           const activePlayers = reorder(
-            state.activePlayers,
+            props.players,
             result.source.index,
             result.destination.index
           );
       
-          setState({ activePlayers });
+
+          props.stateChanger(activePlayers)
 
     }
        
@@ -116,7 +117,7 @@ function PlayerListing(props) {
 
             <DragDropContext onDragEnd={onDragEnd}>
                 <PlayerListingHeader>
-                    Active Players ({state.activePlayers.length}):
+                    Active Players ({props.players.length}):
                 </PlayerListingHeader>
                 <Droppable droppableId={'activePlayers'}>
                     {provided => (
@@ -129,7 +130,7 @@ function PlayerListing(props) {
                                     <Number className="number">NUMBER</Number>
                                     <Position className="position">POSITION NUMBER</Position>
                                 </ListItem>
-                                {state.activePlayers.map((player, index) => (
+                                {props.players.map((player, index) => (
                                     <Player player={player} key={`player${player.id}`} index={index} />
                                 ))}
                                 {provided.placeholder}

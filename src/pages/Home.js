@@ -79,12 +79,14 @@ function Home(props) {
         },
     ]);
 
-    const activePlayers = players.filter(player => player.hasPosition);
+    const handler = (players) => {
+        setPlayers({players})
+      }
 
     return (
         <HomePageSection>
-            <VolleyballCourtTool players={activePlayers}/>
-            <PlayerListing players={players}/>
+            <VolleyballCourtTool players={players}/>
+            <PlayerListing players={players} stateChanger={setPlayers} />
         </HomePageSection>
     );
 }
