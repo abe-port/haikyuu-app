@@ -14,7 +14,7 @@ import PlayerDetail from './pages/PlayerDetail';
 const Page = styled.section`
   min-height:100vh;
   background: rgb(239, 239, 239);
-  
+  padding-top:60px;
 `;
 
 

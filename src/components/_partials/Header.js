@@ -18,7 +18,7 @@ const Nav = styled.section`
   height:60px;
   z-index: 999;
   @media(min-width: 768px) {
-   position:relative
+   top:0;
   }
 
 `;
