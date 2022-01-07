@@ -48,7 +48,34 @@ function Home(props) {
             number: '1',
             height: '176.7',
             age: '18',
-            hasPosition:false
+            hasPosition:true
+        },
+        {
+            id: 3,
+            first_name: 'Sugawara',
+            last_name: 'Koshi',
+            number: '2',
+            height: '174.6',
+            age: '18',
+            hasPosition:true
+        },
+        {
+            id: 4,
+            first_name: 'Azumane',
+            last_name: 'Asahi',
+            number: '3',
+            height: '186.4',
+            age: '18',
+            hasPosition:true
+        },
+        {
+            id: 5,
+            first_name: 'Nishinoya',
+            last_name: 'Yu',
+            number: '4',
+            height: '160.5',
+            age: '17',
+            hasPosition:true
         },
     ]);
 

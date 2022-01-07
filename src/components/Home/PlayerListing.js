@@ -71,22 +71,52 @@ cursor:pointer;
 }
 `;
 
+const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+  
+    return result;
+  };
+  
 
 function PlayerListing(props) {
 
-    const activePlayers = props.players.filter(player => player.hasPosition);
-    const benchedPlayers = props.players.filter(player => !player.hasPosition);
+    const [state, setState] = useState({ 
+        activePlayers: props.players.filter(player => player.hasPosition),
+        benchedPlayers: props.players.filter(player => !player.hasPosition),
+    });
 
     const onDragEnd = result => {
-        console.log('hello')
+
+        const {destination, source, draggableId } = result;
+
+
+        if (!result.destination) {
+            return;
+          }
+      
+          if (result.destination.index === result.source.index) {
+            return;
+          }
+      
+          const activePlayers = reorder(
+            state.activePlayers,
+            result.source.index,
+            result.destination.index
+          );
+      
+          setState({ activePlayers });
+
     }
+       
 
     return (
         <div>
 
             <DragDropContext onDragEnd={onDragEnd}>
                 <PlayerListingHeader>
-                    Active Players ({activePlayers.length}):
+                    Active Players ({state.activePlayers.length}):
                 </PlayerListingHeader>
                 <Droppable droppableId={'activePlayers'}>
                     {provided => (
@@ -99,7 +129,7 @@ function PlayerListing(props) {
                                     <Number className="number">NUMBER</Number>
                                     <Position className="position">POSITION NUMBER</Position>
                                 </ListItem>
-                                {activePlayers.map((player, index) => (
+                                {state.activePlayers.map((player, index) => (
                                     <Player player={player} key={`player${player.id}`} index={index} />
                                 ))}
                                 {provided.placeholder}
@@ -108,8 +138,8 @@ function PlayerListing(props) {
                     )}
 
                 </Droppable>
-                <PlayerListingHeader>
-                    Bench ({benchedPlayers.length}):
+                {/* <PlayerListingHeader>
+                    Bench ({state.benchedPlayers.length}):
                 </PlayerListingHeader>
                 <Droppable droppableId={'benchedPlayers'}>
                     {provided => (
@@ -121,7 +151,7 @@ function PlayerListing(props) {
                                     <Name className="name">NAME</Name>
                                     <Number className="number">NUMBER</Number>
                                 </ListItem>
-                                {benchedPlayers.map((player, index) => (
+                                {state.benchedPlayers.map((player, index) => (
                                     <Player player={player} key={`player${player.id}`} index={index} />
                                 ))}
                                 {provided.placeholder}
@@ -129,7 +159,7 @@ function PlayerListing(props) {
                         </div>
                     )}
 
-                </Droppable>
+                </Droppable> */}
             </DragDropContext>
         </div>
     );
