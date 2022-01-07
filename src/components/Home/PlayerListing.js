@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import CourtSrc from '../../assets/img/court.png';
 import styled from 'styled-components';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import Player from './Player';
 import {
     Link,
-  } from "react-router-dom";
+} from "react-router-dom";
 
 const PlayerListingHeader = styled.h3`
 font-size:16px;
@@ -17,6 +19,7 @@ const UnorderedList = styled.ul`
 list-style-type:none;
 padding-inline-start: 0px;
 margin-bottom:70px;
+
 `;
 
 const ListItem = styled.li`
@@ -74,54 +77,60 @@ function PlayerListing(props) {
     const activePlayers = props.players.filter(player => player.hasPosition);
     const benchedPlayers = props.players.filter(player => !player.hasPosition);
 
+    const onDragEnd = result => {
+        console.log('hello')
+    }
+
     return (
         <div>
-            <PlayerListingHeader>
-                Active Players ({activePlayers.length}):
-            </PlayerListingHeader>
-            <UnorderedList>
-                <ListItem bolded>
-                    <Name className="name">NAME</Name>
-                    <Number className="number">NUMBER</Number>
-                    <Position className="position">POSITION NUMBER</Position>
-                </ListItem>
-                {activePlayers.map((player, index) => (
-                    <ListItem key={index}>
-                        <Name className="name">{player.first_name} {player.last_name}</Name>
-                        <Number className="number">{player.number}</Number>
-                        <Position className="position">{index+1}</Position>
-                        {/* <Link to={`players/${player.id}`}>
-                            <EditIcon><span className="material-icons">
-                                edit
-                            </span>
-                            </EditIcon>
-                        </Link> */}
-                    </ListItem>
-                ))}
-            </UnorderedList>
-            <PlayerListingHeader>
-                Bench ({benchedPlayers.length}):
-            </PlayerListingHeader>
-            <UnorderedList>
-                <ListItem bolded>
-                    <Name className="name">NAME</Name>
-                    <Number className="number">NUMBER</Number>
-                    <Position className="position">POSITION NUMBER</Position>
-                </ListItem>
-                {benchedPlayers.map((player, index) => (
-                    <ListItem key={index}>
-                        <Name className="name">{player.first_name} {player.last_name}</Name>
-                        <Number className="number">{player.number}</Number>
-                        <Position className="position">{player.position}</Position>
-                        {/* <Link to={`players/${player.id}`}>
-                            <EditIcon><span className="material-icons">
-                                edit
-                            </span>
-                            </EditIcon>
-                        </Link> */}
-                    </ListItem>
-                ))}
-            </UnorderedList>
+
+            <DragDropContext onDragEnd={onDragEnd}>
+                <PlayerListingHeader>
+                    Active Players ({activePlayers.length}):
+                </PlayerListingHeader>
+                <Droppable droppableId={'activePlayers'}>
+                    {provided => (
+                        <div ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            <UnorderedList>
+                                <ListItem bolded>
+                                    <Name className="name">NAME</Name>
+                                    <Number className="number">NUMBER</Number>
+                                    <Position className="position">POSITION NUMBER</Position>
+                                </ListItem>
+                                {activePlayers.map((player, index) => (
+                                    <Player player={player} key={`player${player.id}`} index={index} />
+                                ))}
+                                {provided.placeholder}
+                            </UnorderedList>
+                        </div>
+                    )}
+
+                </Droppable>
+                <PlayerListingHeader>
+                    Bench ({benchedPlayers.length}):
+                </PlayerListingHeader>
+                <Droppable droppableId={'benchedPlayers'}>
+                    {provided => (
+                        <div ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            <UnorderedList>
+                                <ListItem bolded>
+                                    <Name className="name">NAME</Name>
+                                    <Number className="number">NUMBER</Number>
+                                </ListItem>
+                                {benchedPlayers.map((player, index) => (
+                                    <Player player={player} key={`player${player.id}`} index={index} />
+                                ))}
+                                {provided.placeholder}
+                            </UnorderedList>
+                        </div>
+                    )}
+
+                </Droppable>
+            </DragDropContext>
         </div>
     );
 }
